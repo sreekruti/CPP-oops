@@ -76,6 +76,31 @@ int main() {
     delete p1;
     delete p2;
     delete p3;
+    try {
+        Account negative_account = new Checking_Account("Larry", -10000);
+        std::cout << *negative_account << std::endl;
+    }
+    catch (const IllegalBalanceException &ex)
+    {
+        std::cerr << ex.what() << std::endl;
+    }
+  try {
+       Account funds_account = new Checking_Account("Moe", 1000.0);
+        std::cout << *funds_account << std::endl;
+        funds_account->withdraw(500.0);
+        std::cout <<*funds_account << std::endl;
+        funds_account->withdraw(1000.0);
+        std::cout << *funds_account << std::endl;
+        
+    }
+    catch (const IllegalBalanceException &ex)
+    {
+        std::cerr << ex.what() << std::endl;
+    }
+    catch (const InsufficientFundsException &ex) {
+        std::cerr << ex.what() << std::endl;
+    }
+    std::cout << "Program completed successfully" << std::endl;
     return 0;
 }
 
